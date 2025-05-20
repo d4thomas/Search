@@ -7,7 +7,7 @@ import search_problems.SlidingTilePuzzle;
 import java.util.List;
 
 public class DFS_STP extends BestFirstSearch<List<Integer>, String> {
-    public DFS_STP(){
+    public DFS_STP() {
         super(new SlidingTilePuzzle(), new FILOQueue<>());
     }
 

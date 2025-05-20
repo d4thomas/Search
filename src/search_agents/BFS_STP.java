@@ -7,7 +7,7 @@ import search_problems.SlidingTilePuzzle;
 import java.util.List;
 
 public class BFS_STP extends BestFirstSearch<List<Integer>, String> {
-    public BFS_STP(){
+    public BFS_STP() {
         super(new SlidingTilePuzzle(), new FIFOQueue<>());
     }
 
@@ -17,5 +17,3 @@ public class BFS_STP extends BestFirstSearch<List<Integer>, String> {
     }
 
 }
-
-

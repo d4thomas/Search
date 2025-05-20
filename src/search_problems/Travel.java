@@ -6,7 +6,7 @@ import core_search.Tuple;
 import java.io.File;
 import java.util.*;
 
-public class Travel implements Problem<String,String> {
+public class Travel implements Problem<String, String> {
 
     private final String INITIAL_STATE = "Arad";
     private final String GOAL_STATE = "Bucharest";
@@ -32,16 +32,15 @@ public class Travel implements Problem<String,String> {
         buildEstimatedDistances();
     }
 
-
-    private void buildTransitionModel(){
-        try(Scanner sc = new Scanner(new File(MAP_FILE))){
-            while(sc.hasNext()) {
+    private void buildTransitionModel() {
+        try (Scanner sc = new Scanner(new File(MAP_FILE))) {
+            while (sc.hasNext()) {
                 String[] a = sc.nextLine().split(":");
                 String cityA = a[0];
                 String cityB = a[1];
                 int cost = Integer.parseInt(a[2]);
                 if (transitionModel.containsKey(cityA)) {
-                    //first time seeing this city, add a new entry to map
+                    // first time seeing this city, add a new entry to map
                     List<Tuple<String, String>> l = transitionModel.get(cityA);
                     l.add(new Tuple<>(cityB, "to" + cityB, cost));
                     transitionModel.replace(cityA, l);
@@ -61,45 +60,45 @@ public class Travel implements Problem<String,String> {
                     transitionModel.put(cityB, l);
                 }
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void buildEstimatedDistances(){
-        try(Scanner sc = new Scanner(new File(ESTIMATE_FILE))){
-            while(sc.hasNext()) {
+    private void buildEstimatedDistances() {
+        try (Scanner sc = new Scanner(new File(ESTIMATE_FILE))) {
+            while (sc.hasNext()) {
                 String[] a = sc.nextLine().split(":");
                 String city = a[0];
                 int estimate = Integer.parseInt(a[1]);
                 estimatedDistances.put(city, estimate);
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public int getEstimatedDistance (String s){
+    public int getEstimatedDistance(String s) {
         return estimatedDistances.get(s);
     }
 
-    public String initialState(){
+    public String initialState() {
         return INITIAL_STATE;
     }
 
-    public String goalState(){
+    public String goalState() {
         return GOAL_STATE;
     }
 
-    public List<Tuple<String,String>> execution(String city){
-        if(transitionModel.containsKey(city)) {
+    public List<Tuple<String, String>> execution(String city) {
+        if (transitionModel.containsKey(city)) {
             return transitionModel.get(city);
-        }else{
+        } else {
             return null;
         }
     }
 
-    public void printState(String city){
+    public void printState(String city) {
         System.out.println(city);
     }
 
